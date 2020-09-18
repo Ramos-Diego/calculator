@@ -1,22 +1,21 @@
 // Single key in the calculator
 
 import { Square } from '@chakra-ui/core'
-import { useState } from 'react'
+import { GlobalContext } from '../context/GlobalState'
+import { useContext } from 'react'
 
 export default function Key({ children, operator, value }) {
-  const [data, setData] = useState()
+  const { accumulate, operate } = useContext(GlobalContext)
 
   return (
     <Square
-      value={value}
       fontSize="20px"
-      bgColor={operator ? "lightpink" : "lightblue"}
+      bgColor={operator ? 'lightpink' : 'lightblue'}
       size="60px"
       onClick={() => {
-        setData(value)
-        console.log(data)
+        operator ? operate(operator) : accumulate(value)
       }}
-      _hover={{cursor: 'default'}}
+      _hover={{ cursor: 'default' }}
     >
       {children}
     </Square>
