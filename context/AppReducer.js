@@ -1,39 +1,39 @@
 // Use OOP to easily add mathematical operations
 
-function mathOps(operand1, operand2, operator) {
-  this.operand1 = operand1
-  this.operand2 = operand2
+function mathOps(result, accumulator, operator) {
+  this.result = result
+  this.accumulator = accumulator
   this.operator = operator
 
   this.ADD = function () {
-    if (operand1 === '') {
-      return operand2
+    if (result === '') {
+      return accumulator
     } else {
-      return `${+operand1 + +operand2}`
+      return `${+result + +accumulator}`
     }
   }
 
   this.SUBSTRACT = function () {
-    if (operand1 === '') {
-      return operand2
+    if (result === '') {
+      return accumulator
     } else {
-      return `${+operand1 - +operand2}`
+      return `${+result - +accumulator}`
     }
   }
 
   this.MULTIPLY = function () {
-    if (operand1 === '') {
-      return operand2
+    if (result === '') {
+      return accumulator
     } else {
-      return `${+operand1 * +operand2}`
+      return `${+result * +accumulator}`
     }
   }
 
   this.DIVIDE = function () {
-    if (operand1 === '') {
-      return operand2
+    if (result === '') {
+      return accumulator
     } else {
-      return `${+operand1 / +operand2}`
+      return `${+result / +accumulator}`
     }
   }
 
@@ -41,13 +41,18 @@ function mathOps(operand1, operand2, operator) {
     return ''
   }
 
-  this.EQUALS = function() {
+  this.EQUALS = function () {
     switch (operator) {
-      case 'ADD': return `${+operand1 + +operand2}`
-      case 'SUBSTRACT': return `${+operand1 - +operand2}`
-      case 'MULTIPLY': return `${+operand1 * +operand2}`
-      case 'DIVIDE': return `${+operand1 / +operand2}`
-      default: return state
+      case 'ADD':
+        return `${+result + +accumulator}`
+      case 'SUBSTRACT':
+        return `${+result - +accumulator}`
+      case 'MULTIPLY':
+        return `${+result * +accumulator}`
+      case 'DIVIDE':
+        return `${+result / +accumulator}`
+      default:
+        return state
     }
   }
 }
@@ -65,7 +70,11 @@ export default function AppReducer(state, action) {
         accumulator: state.accumulator + action.payload,
       }
     case 'OPERATE':
-      const calculation = new mathOps(state.result, state.accumulator, state.operator)
+      const calculation = new mathOps(
+        state.result,
+        state.accumulator,
+        state.operator
+      )
       return {
         ...state,
         accumulator: '',

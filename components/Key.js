@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState'
 import { useContext } from 'react'
 
 export default function Key({ children, operator, value }) {
-  const { accumulate, operate } = useContext(GlobalContext)
+  const { state, dispatch } = useContext(GlobalContext)
 
   return (
     <Square
@@ -13,7 +13,15 @@ export default function Key({ children, operator, value }) {
       bgColor={operator ? 'lightpink' : 'lightblue'}
       size="60px"
       onClick={() => {
-        operator ? operate(operator) : accumulate(value)
+        operator
+          ? dispatch({
+              type: 'OPERATE',
+              payload: operator,
+            })
+          : dispatch({
+              type: 'ACCUMULATE',
+              payload: value,
+            })
       }}
       _hover={{ cursor: 'default' }}
     >

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import AppReducer from './AppReducer'
 
-const initialState = {
+export const initialState = {
   result: "",
   operator: "",
   accumulator: "",
@@ -17,30 +17,8 @@ export const GlobalProvider = ({ children }) => {
   // A reducer function enables the consumption and modification of states
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  // The dispatch functions are passed to the global provider
-  // This way they can be called from any element
-  function accumulate(payload) {
-    dispatch({
-      type: 'ACCUMULATE',
-      payload
-    })
-  }
-
-  // The 'type' is a convention to identify the function
-  // in a switch statement. The payload is optional for dispatch
-  function operate(payload) {
-    dispatch({
-      type: 'OPERATE',
-      payload
-    })
-  }
-
   return (
-    <GlobalContext.Provider value={{
-      ...state,
-      accumulate,
-      operate
-    }}>
+    <GlobalContext.Provider value={{...state, dispatch}}>
       {children}
     </GlobalContext.Provider>
   )
