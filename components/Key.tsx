@@ -4,7 +4,7 @@ import { Square } from '@chakra-ui/core'
 import { GlobalContext } from '../context/GlobalState'
 import { useContext } from 'react'
 
-export default function Key({ children, operator, value }) {
+const Key = ({ children, operator, value }: KeyProps) => {
   const { dispatch } = useContext(GlobalContext)
 
   return (
@@ -29,3 +29,5 @@ export default function Key({ children, operator, value }) {
     </Square>
   )
 }
+
+export default Key

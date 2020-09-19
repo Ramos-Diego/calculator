@@ -1,19 +1,11 @@
 import Head from 'next/head'
-import {
-  Box,
-  SimpleGrid,
-  Container,
-  Heading,
-  Input,
-  Square,
-  Button,
-} from '@chakra-ui/core'
+import { Box, SimpleGrid, Container, Heading } from '@chakra-ui/core'
 import Key from '../components/Key'
 import { GlobalContext } from '../context/GlobalState'
 import { useContext } from 'react'
 
 export default function Home() {
-  const { result, accumulator } = useContext(GlobalContext)
+  const { state } = useContext(GlobalContext)
 
   return (
     <Box>
@@ -22,8 +14,12 @@ export default function Home() {
       </Head>
 
       <Container display="grid" alignContent="center" w="250px" h="100vh">
-        <Heading as="h1" fontSize="lg" mb={3} textAlign="end">Result: {result}</Heading>
-        <Heading as="h1" fontSize="lg" mb={3} textAlign="end">Accumulator: {accumulator}</Heading>
+        <Heading as="h1" fontSize="lg" mb={3} textAlign="end">
+          Total: {state.result ? state.result : '0'}
+        </Heading>
+        <Heading as="h1" fontSize="lg" mb={3} textAlign="end">
+          {state.accumulator ? state.accumulator : '0'}
+        </Heading>
 
         {/* Keyboard */}
         <SimpleGrid columns={4} spacing={1}>
