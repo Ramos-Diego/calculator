@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState'
 import { useContext } from 'react'
 
 export default function Key({ children, operator, value }) {
-  const { state, dispatch } = useContext(GlobalContext)
+  const { dispatch } = useContext(GlobalContext)
 
   return (
     <Square
